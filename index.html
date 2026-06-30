@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Environmental Enterprises USA, Inc. — NELAP-Accredited Analytical Laboratory</title>
+<meta name="description" content="NELAP-accredited environmental testing laboratory in Slidell, Louisiana. Aquatic toxicity, oil & grease, GC/MS and freshwater/saltwater analysis for the oil & gas, municipal and industrial sectors." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --blue-900:#0f3a52;
+    --blue-700:#1d6f9e;
+    --blue-600:#2e8bbf;
+    --blue-500:#4ea7d6;
+    --blue-100:#e7f3fb;
+    --blue-50:#f1f8fd;
+    --green-700:#3f9a55;
+    --green-600:#56b86c;
+    --green-500:#71c98a;
+    --green-100:#e8f6ec;
+    --plum:#6a3d8f;          /* logo droplet accent, used sparingly */
+    --ink:#143341;
+    --muted:#5b7686;
+    --line:#dde9f1;
+    --white:#ffffff;
+    --bg:#f6fbfe;
+    --shadow-sm:0 1px 3px rgba(20,51,65,.07), 0 1px 2px rgba(20,51,65,.04);
+    --shadow:0 10px 30px -12px rgba(20,51,65,.22);
+    --shadow-lg:0 24px 60px -24px rgba(20,51,65,.32);
+    --radius:18px;
+    --radius-sm:12px;
+    --maxw:1160px;
+    --nav-h:78px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;line-height:1.12;margin:0;font-weight:600;letter-spacing:-.01em}
+  p{margin:0}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--blue-700);
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--blue-500),var(--green-500))}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:.95rem;
+    padding:13px 22px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;transition:.18s ease;white-space:nowrap}
+  .btn svg{width:18px;height:18px}
+  .btn-primary{background:linear-gradient(135deg,var(--blue-600),var(--blue-700));color:#fff;box-shadow:0 8px 20px -8px rgba(29,111,158,.6)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(29,111,158,.7)}
+  .btn-green{background:linear-gradient(135deg,var(--green-600),var(--green-700));color:#fff;box-shadow:0 8px 20px -8px rgba(63,154,85,.55)}
+  .btn-green:hover{transform:translateY(-2px)}
+  .btn-ghost{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.5);backdrop-filter:blur(4px)}
+  .btn-ghost:hover{background:rgba(255,255,255,.22)}
+  .btn-outline{background:#fff;color:var(--blue-700);border-color:var(--line)}
+  .btn-outline:hover{border-color:var(--blue-500);color:var(--blue-700);transform:translateY(-2px)}
+
+  /* Utility top bar */
+  .topbar{background:var(--blue-900);color:#dceaf4;font-size:.84rem}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:42px}
+  .topbar a{color:#dceaf4;display:inline-flex;align-items:center;gap:7px;font-weight:500}
+  .topbar a:hover{color:#fff}
+  .topbar .tb-left{display:flex;gap:22px}
+  .topbar svg{width:15px;height:15px;opacity:.85}
+  .topbar .tb-right{display:flex;align-items:center;gap:8px;color:#9dc4db}
+  .pill-portal{background:linear-gradient(135deg,var(--green-500),var(--green-600));color:#06351a !important;font-weight:700;
+    padding:5px 14px;border-radius:999px;font-size:.8rem}
+  .pill-portal:hover{filter:brightness(1.05)}
+
+  /* Header */
+  header.nav{position:sticky;top:0;z-index:50;background:transparent;border-bottom:1px solid transparent;
+    transition:background .35s ease,border-color .35s ease,box-shadow .35s ease}
+  header.nav.scrolled{background:rgba(255,255,255,.9);backdrop-filter:saturate(140%) blur(12px);
+    border-bottom-color:var(--line);box-shadow:0 6px 22px -14px rgba(20,51,65,.3)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
+  .brand{display:flex;align-items:center;gap:13px}
+  .brand img{height:50px;width:auto}
+  .brand .bt{display:flex;flex-direction:column;line-height:1.05}
+  .brand .bt b{font-family:"Fraunces",serif;font-weight:700;font-size:1.06rem;color:#fff;letter-spacing:-.01em;transition:color .35s ease;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+  .brand .bt span{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:#bfe9c9;font-weight:700;transition:color .35s ease;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+  .nav.scrolled .brand .bt b{color:var(--blue-900);text-shadow:none}
+  .nav.scrolled .brand .bt span{color:var(--green-700);text-shadow:none}
+  nav.links{display:flex;align-items:center;gap:30px}
+  nav.links a{font-weight:500;font-size:.95rem;color:#fff;position:relative;padding:6px 0;transition:color .35s ease;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+  .nav.scrolled nav.links a{color:var(--ink);text-shadow:none}
+  nav.links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,var(--blue-500),var(--green-500));transition:.2s}
+  nav.links a:hover::after{width:100%}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .menu-btn svg{width:28px;height:28px;color:#fff}
+  .nav.scrolled .menu-btn svg{color:var(--blue-900)}
+
+  /* Mobile drawer */
+  .drawer-overlay{position:fixed;inset:0;z-index:60;background:rgba(12,48,68,.5);backdrop-filter:blur(2px);opacity:0;transition:opacity .3s ease}
+  .drawer-overlay.show{opacity:1}
+  .drawer{position:fixed;top:0;right:0;z-index:61;height:100%;width:min(86vw,360px);background:#fff;
+    box-shadow:-20px 0 60px -20px rgba(20,51,65,.4);transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;padding:22px 24px 28px;overflow-y:auto}
+  .drawer.open{transform:translateX(0)}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .drawer-head .brand img{height:42px}
+  .drawer-head .brand .bt b{color:var(--blue-900);text-shadow:none;font-size:.98rem}
+  .drawer-head .brand .bt span{color:var(--green-700);text-shadow:none}
+  .drawer-close{background:var(--blue-50);border:1px solid var(--line);border-radius:10px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+  .drawer-close svg{width:20px;height:20px;color:var(--blue-900)}
+  .drawer-links{display:flex;flex-direction:column;margin-top:14px}
+  .drawer-links a{font-weight:600;font-size:1.05rem;color:var(--ink);padding:15px 6px;border-bottom:1px solid var(--line);transition:.18s}
+  .drawer-links a:hover{color:var(--blue-700);padding-left:12px}
+  .drawer-cta{justify-content:center;margin-top:22px}
+  .drawer-contact{margin-top:auto;padding-top:22px;display:grid;gap:12px}
+  .drawer-contact a{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem;color:var(--blue-800,var(--blue-700))}
+  .drawer-contact a svg{width:18px;height:18px;color:var(--green-600)}
+  body.drawer-locked{overflow:hidden}
+
+  /* Hero */
+  .hero{position:relative;color:#fff;overflow:hidden;isolation:isolate;margin-top:calc(-1 * var(--nav-h))}
+  .hero-bg{position:absolute;inset:0;z-index:-2}
+  .hero-bg img,.hero-bg video{width:100%;height:100%;object-fit:cover}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(12,48,68,.84) 0%,rgba(23,92,128,.55) 48%,rgba(15,58,82,.90) 100%)}
+  .hero .wrap{padding:calc(72px + var(--nav-h)) 24px 110px;max-width:var(--maxw)}
+  .hero-inner{max-width:780px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .badge-accred{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.3);padding:8px 16px 8px 8px;border-radius:999px;font-size:.82rem;font-weight:600;margin-bottom:26px;backdrop-filter:blur(4px)}
+  .badge-accred .dot{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;
+    background:linear-gradient(135deg,var(--green-500),var(--green-600));font-size:.7rem;font-weight:800}
+  .hero h1{font-size:clamp(2.3rem,5vw,3.7rem);font-weight:700;letter-spacing:-.02em}
+  .hero h1 .accent{color:#bfe9c9}
+  .hero p.lead{font-size:1.18rem;color:#e3f1f9;margin-top:22px;max-width:600px}
+  .hero .scope{margin-top:18px;font-size:.92rem;color:#cfe6f2;display:inline-flex;align-items:center;gap:9px}
+  .hero .scope svg{width:18px;height:18px;color:#bfe9c9;flex:none}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px;justify-content:center}
+  .hero-stats{display:flex;flex-wrap:wrap;gap:34px;margin-top:54px;padding-top:30px;border-top:1px solid rgba(255,255,255,.2);justify-content:center;text-align:center}
+  .hero-stats .s b{display:block;font-family:"Fraunces",serif;font-size:1.9rem;font-weight:700;color:#fff}
+  .hero-stats .s span{font-size:.82rem;color:#cfe6f2;letter-spacing:.03em}
+
+  /* Accreditation strip */
+  .trust{background:#fff;border-bottom:1px solid var(--line)}
+  .trust .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:26px;padding:26px 24px}
+  .trust .label{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .trust .marks{display:flex;flex-wrap:wrap;gap:14px}
+  .mark{display:inline-flex;align-items:center;gap:9px;background:var(--blue-50);border:1px solid var(--line);
+    padding:9px 16px;border-radius:999px;font-weight:700;font-size:.9rem;color:var(--blue-900)}
+  .mark .tag{font-size:.66rem;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--green-600);padding:3px 8px;border-radius:999px}
+  .mark.blue .tag{background:var(--blue-600)}
+
+  /* Section scaffold */
+  section{padding:90px 0}
+  .sec-head{max-width:680px;margin-bottom:48px}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .sec-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-top:14px;color:var(--blue-900)}
+  .sec-head p{color:var(--muted);font-size:1.08rem;margin-top:16px}
+
+  /* Services grid */
+  .services{background:var(--bg)}
+  .grid-svc{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .svc{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:.2s;position:relative;overflow:hidden}
+  .svc::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:linear-gradient(90deg,var(--blue-500),var(--green-500));opacity:0;transition:.2s}
+  .svc:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:transparent}
+  .svc:hover::before{opacity:1}
+  .svc .ic{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+    background:linear-gradient(135deg,var(--blue-100),var(--green-100))}
+  .svc .ic svg{width:26px;height:26px;color:var(--blue-700)}
+  .svc h3{font-size:1.18rem;color:var(--blue-900)}
+  .svc p{color:var(--muted);font-size:.95rem;margin-top:9px}
+  .svc .tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:7px}
+  .svc .tags span{font-size:.76rem;color:var(--blue-700);background:var(--blue-50);border:1px solid var(--line);padding:4px 10px;border-radius:999px;font-weight:600}
+
+  /* Logistics */
+  .logi{background:linear-gradient(180deg,#fff, var(--blue-50))}
+  .grid-logi{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:46px}
+  .lcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow-sm)}
+  .lcard .ic{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:#fff}
+  .lcard.coc .ic{background:linear-gradient(135deg,var(--blue-600),var(--blue-700))}
+  .lcard.del .ic{background:linear-gradient(135deg,var(--green-600),var(--green-700))}
+  .lcard.hol .ic{background:linear-gradient(135deg,var(--plum),#8a5cb0)}
+  .lcard .ic svg{width:28px;height:28px}
+  .lcard h3{font-size:1.25rem;color:var(--blue-900)}
+  .lcard p{color:var(--muted);margin-top:10px;font-size:.96rem}
+  .lcard a.more{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-weight:600;color:var(--blue-700);font-size:.92rem}
+  .lcard a.more svg{width:16px;height:16px;transition:.2s}
+  .lcard a.more:hover svg{transform:translateX(4px)}
+
+  /* schedule + holiday */
+  .sched-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:22px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm)}
+  .panel .ph{padding:20px 26px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;background:var(--blue-50)}
+  .panel .ph svg{width:20px;height:20px;color:var(--blue-700)}
+  .panel .ph h3{font-size:1.08rem;color:var(--blue-900)}
+  .route{padding:16px 26px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:14px}
+  .route:last-child{border-bottom:0}
+  .route .day{flex:none;font-weight:700;font-size:.8rem;color:#fff;padding:5px 11px;border-radius:8px;min-width:96px;text-align:center}
+  .route .day.a{background:var(--blue-600)}
+  .route .day.b{background:var(--green-600)}
+  .route .stops{font-size:.92rem;color:var(--ink)}
+  .route .stops b{color:var(--blue-900)}
+  .holiday .ph{background:#f5eefb}
+  .holiday .ph svg{color:var(--plum)}
+  .hol-list{padding:8px 26px 18px}
+  .hol-list .hi{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--line);font-size:.93rem}
+  .hol-list .hi:last-child{border-bottom:0}
+  .hol-list .hi .closed{font-size:.72rem;font-weight:700;color:#b23a48;background:#fce8ea;padding:3px 9px;border-radius:999px}
+  .hol-note{font-size:.82rem;color:var(--muted);padding:0 26px 20px}
+
+  /* Portal CTA */
+  .portal{background:linear-gradient(120deg,var(--blue-900),var(--blue-700));color:#fff;border-radius:26px;overflow:hidden;position:relative}
+  .portal-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:10px}
+  .portal-copy{padding:56px 50px}
+  .portal .eyebrow{color:#bfe9c9}
+  .portal .eyebrow::before{background:#bfe9c9}
+  .portal h2{font-size:clamp(1.8rem,3vw,2.5rem);color:#fff;margin-top:14px}
+  .portal p{color:#d6e8f3;margin-top:16px;font-size:1.05rem;max-width:440px}
+  .portal ul{list-style:none;padding:0;margin:24px 0 30px;display:grid;gap:12px}
+  .portal li{display:flex;align-items:center;gap:11px;font-size:.98rem;color:#eaf4fa}
+  .portal li svg{width:20px;height:20px;color:#bfe9c9;flex:none}
+  .portal-visual{position:relative;align-self:stretch;min-height:340px;background:url('assets/img/lab-samples.jpg') center/cover}
+  .portal-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--blue-700),transparent 55%)}
+  .login-card{position:absolute;z-index:2;right:40px;top:50%;transform:translateY(-50%);width:300px;background:#fff;color:var(--ink);
+    border-radius:18px;padding:26px;box-shadow:var(--shadow-lg)}
+  .login-card h4{font-family:"Fraunces",serif;font-size:1.15rem;color:var(--blue-900);margin:0 0 4px}
+  .login-card p{color:var(--muted);font-size:.84rem;margin:0 0 18px}
+  .login-card label{font-size:.78rem;font-weight:600;color:var(--ink);display:block;margin-bottom:6px}
+  .login-card input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font-size:.9rem;margin-bottom:14px;font-family:inherit}
+  .login-card input:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 3px var(--blue-100)}
+  .login-card .btn{width:100%;justify-content:center}
+
+  /* Accreditation showcase */
+  .accred{background:var(--bg)}
+  .accred-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:10px}
+  .cert{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:.2s}
+  .cert:hover{box-shadow:var(--shadow);transform:translateY(-4px)}
+  .cert .imgwrap{background:#eef4f8;padding:18px;border-bottom:1px solid var(--line)}
+  .cert img{border-radius:8px;box-shadow:0 6px 18px -10px rgba(20,51,65,.4)}
+  .cert .cap{padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .cert .cap b{font-size:1rem;color:var(--blue-900)}
+  .cert .cap span{font-size:.82rem;color:var(--muted);display:block;margin-top:2px}
+  .cert .cap .view{font-size:.82rem;font-weight:600;color:var(--blue-700);display:inline-flex;gap:5px;align-items:center;white-space:nowrap}
+  .accred-note{display:flex;gap:14px;align-items:flex-start;margin-top:28px;background:var(--green-100);border:1px solid #cdedd6;
+    border-radius:14px;padding:18px 22px;color:#235e35;font-size:.95rem}
+  .accred-note svg{width:22px;height:22px;flex:none;color:var(--green-700);margin-top:2px}
+
+  /* Contact */
+  .contact{background:linear-gradient(180deg,var(--blue-50),#fff)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:start}
+  .contact-info h2{color:var(--blue-900);font-size:clamp(1.9rem,3vw,2.6rem);margin-top:14px}
+  .contact-info p.sub{color:var(--muted);margin-top:16px;font-size:1.06rem}
+  .info-list{margin-top:30px;display:grid;gap:8px}
+  .info{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .info .ic{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--blue-100),var(--green-100));
+    display:flex;align-items:center;justify-content:center;flex:none}
+  .info .ic svg{width:21px;height:21px;color:var(--blue-700)}
+  .info .t span{font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+  .info .t b{display:block;color:var(--blue-900);font-size:1.02rem;margin-top:2px}
+  .info .t b a:hover{color:var(--blue-600)}
+  .info .t small{color:var(--muted);font-size:.86rem}
+
+  .form-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:34px;box-shadow:var(--shadow)}
+  .form-card h3{font-size:1.4rem;color:var(--blue-900)}
+  .form-card .fsub{color:var(--muted);font-size:.94rem;margin-top:8px;margin-bottom:24px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{margin-bottom:16px}
+  .field label{font-size:.82rem;font-weight:600;color:var(--ink);display:block;margin-bottom:7px}
+  .field input,.field select,.field textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px;font-size:.94rem;font-family:inherit;color:var(--ink);background:#fcfeff}
+  .field textarea{min-height:120px;resize:vertical}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 3px var(--blue-100)}
+  .form-card .btn{width:100%;justify-content:center;margin-top:6px}
+  .form-foot{text-align:center;font-size:.8rem;color:var(--muted);margin-top:14px}
+
+  /* Footer */
+  footer{background:var(--blue-900);color:#bcd6e6;padding:64px 0 0}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;padding-bottom:46px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .foot-brand img{height:52px;margin-bottom:16px;background:#fff;border-radius:10px;padding:6px}
+  .foot-brand p{font-size:.92rem;color:#9dc4db;max-width:280px}
+  footer h5{color:#fff;font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;margin:0 0 16px;font-family:"Inter",sans-serif;font-weight:700}
+  footer ul{list-style:none;padding:0;margin:0;display:grid;gap:11px}
+  footer ul a{font-size:.92rem;color:#bcd6e6}
+  footer ul a:hover{color:#fff}
+  .foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:22px 0;font-size:.84rem;color:#7ea7c2}
+  .foot-bottom .badges{display:flex;gap:10px}
+  .foot-bottom .badges span{background:rgba(255,255,255,.08);padding:4px 12px;border-radius:999px;font-weight:600;color:#cfe6f2;font-size:.78rem}
+
+  /* Responsive */
+  @media(max-width:980px){
+    .grid-svc,.grid-logi{grid-template-columns:1fr 1fr}
+    .sched-wrap,.portal-grid,.accred-grid,.contact-grid,.foot-grid{grid-template-columns:1fr}
+    .portal-visual{min-height:300px}
+    .login-card{position:static;transform:none;width:auto;margin:24px}
+    nav.links{display:none}
+    .menu-btn{display:block}
+    .nav-cta .btn:not(.menu-btn){display:none}
+  }
+  @media(max-width:620px){
+    section{padding:64px 0}
+    .grid-svc,.grid-logi,.frow{grid-template-columns:1fr}
+    /* Slim utility bar: keep one phone + portal pill, drop the rest */
+    .topbar .wrap{gap:10px}
+    .topbar .tb-left{gap:0;min-width:0}
+    .topbar .tb-left a{white-space:nowrap}
+    .topbar .tb-left a:nth-child(2),
+    .topbar .tb-left a:nth-child(3){display:none}
+    .topbar .tb-right span{display:none}
+    .hero .wrap{padding:calc(40px + var(--nav-h)) 24px 80px}
+    .hero-stats{gap:24px}
+    .portal-copy{padding:38px 28px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Utility bar -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="tb-left">
+      <a href="tel:18009662788"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg> 800-966-2788</a>
+      <a href="tel:19856462787"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-3 2a14 14 0 0 0 6 6l2-3 5 2v3a2 2 0 0 1-2 2A17 17 0 0 1 3 5Z"/></svg> 985-646-2787</a>
+      <a href="https://maps.google.com/?q=58485+Pearl+Acres+Road+Slidell+LA+70461" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg> Slidell, Louisiana</a>
+    </div>
+    <div class="tb-right">
+      <span>Mon–Fri · 8am–5pm CT</span>
+      <a class="pill-portal" href="#portal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Client Portal</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="assets/img/logo.png" alt="Environmental Enterprises USA logo" />
+      <span class="bt"><b>Environmental Enterprises</b><span>USA, Inc.</span></span>
+    </a>
+    <nav class="links">
+      <a href="#services">Testing &amp; Analysis</a>
+      <a href="#logistics">Sampling Logistics</a>
+      <a href="#accreditations">Accreditations</a>
+      <a href="#portal">Data Portal</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="#contact">Request a Pickup
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button class="menu-btn" id="menuOpen" aria-label="Open menu" aria-controls="mobileDrawer" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile drawer -->
+<div class="drawer-overlay" id="drawerOverlay" hidden></div>
+<aside class="drawer" id="mobileDrawer" aria-hidden="true" aria-label="Mobile navigation">
+  <div class="drawer-head">
+    <a class="brand" href="#top" data-close>
+      <img src="assets/img/logo.png" alt="Environmental Enterprises USA logo" />
+      <span class="bt"><b>Environmental Enterprises</b><span>USA, Inc.</span></span>
+    </a>
+    <button class="drawer-close" id="menuClose" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <nav class="drawer-links">
+    <a href="#services" data-close>Testing &amp; Analysis</a>
+    <a href="#logistics" data-close>Sampling Logistics</a>
+    <a href="#accreditations" data-close>Accreditations</a>
+    <a href="#portal" data-close>Data Portal</a>
+    <a href="#contact" data-close>Contact</a>
+  </nav>
+  <a class="btn btn-primary drawer-cta" href="#contact" data-close>Request a Pickup
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <div class="drawer-contact">
+    <a href="tel:18009662788"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg> 800-966-2788</a>
+    <a href="#portal" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Client Portal Login</a>
+  </div>
+</aside>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline preload="auto" poster="assets/img/hero-poster.jpg">
+      <source src="assets/video/hero-rig.mp4" type="video/mp4" />
+      <img src="assets/img/hero-poster.jpg" alt="Offshore oil rig silhouette at ocean sunset" />
+    </video>
+  </div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <h1>Precise environmental testing<br><span class="accent">you can build decisions on.</span></h1>
+      <p class="lead">For more than 35 years, the Gulf Coast's oil &amp; gas, municipal and industrial partners have trusted us for accurate aquatic toxicity, chemistry and water-quality analysis — delivered on a schedule you can count on.</p>
+      <p class="scope">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+        A dedicated analytical testing laboratory — focused on lab science, not engineering services.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-green" href="#contact">Schedule Sample Pickup
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#services">Explore Our Testing</a>
+      </div>
+      <div class="hero-stats">
+        <div class="s"><b>1987</b><span>Established in Louisiana</span></div>
+        <div class="s"><b>13,500+</b><span>Sq. ft. of lab space</span></div>
+        <div class="s"><b>NELAP</b><span>LA &amp; TX accredited</span></div>
+        <div class="s"><b>Global</b><span>Clients on 5 continents</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust strip -->
+<div class="trust">
+  <div class="wrap">
+    <span class="label">Accredited &amp; recognized by</span>
+    <div class="marks">
+      <span class="mark blue"><span class="tag">NELAP</span> National Accreditation</span>
+      <span class="mark"><span class="tag">LELAP</span> Louisiana DEQ</span>
+      <span class="mark blue"><span class="tag">TCEQ</span> Texas</span>
+      <span class="mark">MS · AL · GA Recognized</span>
+    </div>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Testing &amp; Analysis</span>
+      <h2>A full scope of environmental laboratory services</h2>
+      <p>From acute aquatic toxicity to trace-level chemistry, our accredited methods support permit compliance, discharge monitoring and product evaluation across the energy and water sectors.</p>
+    </div>
+    <div class="grid-svc">
+
+      <div class="svc">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3v6l-5 9a2 2 0 0 0 1.8 3h12.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7 3h10M8.5 14h7"/></svg></div>
+        <h3>Aquatic Toxicity</h3>
+        <p>Acute and chronic whole-effluent toxicity testing on marine and freshwater organisms for NPDES and discharge compliance.</p>
+        <div class="tags"><span>Produced Water</span><span>CTS Toxicity</span><span>Sediment</span></div>
+      </div>
+
+      <div class="svc">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l2-7 4 14 2-7h4"/></svg></div>
+        <h3>GC/MS &amp; Chemistry</h3>
+        <p>Gas chromatography / mass spectrometry and wet chemistry for precise identification and quantitation of organic compounds.</p>
+        <div class="tags"><span>GC/MS</span><span>Oil &amp; Grease</span><span>NCP Testing</span></div>
+      </div>
+
+      <div class="svc">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5-3 7-6 7-11V5l-7-3-7 3v6c0 5 2 8 7 11Z"/><path d="M12 8v6M9 11h6"/></svg></div>
+        <h3>Water Quality Testing</h3>
+        <p>Comprehensive freshwater and saltwater analysis for municipalities, refineries and industrial discharge programs.</p>
+        <div class="tags"><span>Freshwater</span><span>Saltwater</span><span>Drilling Fluids</span></div>
+      </div>
+
+      <div class="svc">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c2-3 5-4 7-2s4 4 6 2 5-2 7 0"/><path d="M2 17c2-3 5-4 7-2s4 4 6 2 5-2 7 0"/></svg></div>
+        <h3>Biodegradation</h3>
+        <p>Standardized biodegradation studies evaluating the environmental fate of chemical products and additives.</p>
+        <div class="tags"><span>Closed Bottle</span><span>OECD Methods</span></div>
+      </div>
+
+      <div class="svc">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v7a6 6 0 0 0 12 0V3"/><path d="M6 14a6 6 0 0 0 12 0"/></svg></div>
+        <h3>Aquaculture &amp; Organisms</h3>
+        <p>In-house culturing of healthy, consistent test organisms — the foundation of reliable, reproducible toxicity results.</p>
+        <div class="tags"><span>Cultured In-House</span><span>QA Verified</span></div>
+      </div>
+
+      <div class="svc">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h8M8 17h5"/></svg></div>
+        <h3>Data Management</h3>
+        <p>Defensible, well-documented reporting with full QA/QC packages and electronic delivery for your records and regulators.</p>
+        <div class="tags"><span>QA/QC</span><span>e-Reporting</span><span>Audit Ready</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Logistics -->
+<section class="logi" id="logistics">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Sampling Logistics</span>
+      <h2>From your site to our bench — handled with care</h2>
+      <p>Documented chain of custody, scheduled regional pickup routes and clear holiday updates keep your samples valid and your timelines on track.</p>
+    </div>
+
+    <div class="grid-logi">
+      <div class="lcard coc">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M9 3v3h6V3"/></svg></div>
+        <h3>Chain of Custody</h3>
+        <p>Every sample is tracked with a complete, signature-verified chain of custody — protecting the integrity and legal defensibility of your results from collection to final report.</p>
+        <a class="more" href="#contact">Download COC form <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+
+      <div class="lcard del">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h3>Sample Delivery &amp; Pickup</h3>
+        <p>Our regular regional routes pick up samples directly from your facility across South Louisiana — keeping hold times intact and reducing your shipping burden.</p>
+        <a class="more" href="#schedule">View pickup schedule <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+
+      <div class="lcard hol">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></div>
+        <h3>Holiday Updates</h3>
+        <p>Plan ahead with confidence. We post route changes and laboratory closures for every holiday, so you always know exactly when to schedule your sampling.</p>
+        <a class="more" href="#schedule">See holiday closures <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="sched-wrap" id="schedule">
+      <div class="panel">
+        <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>Weekly Pickup Routes</h3></div>
+        <div class="route">
+          <span class="day a">Wed &amp; Fri</span>
+          <span class="stops"><b>Patterson</b> 9:00a · <b>Venice</b> 10:30a · <b>Houma</b> 11:00a · <b>Boothville</b> 11:00a</span>
+        </div>
+        <div class="route">
+          <span class="day b">Tue &amp; Thu</span>
+          <span class="stops"><b>Grand Isle</b> 9:30a · <b>Fourchon</b> 11:00a · <b>Galliano</b> 12:30p</span>
+        </div>
+        <div class="route">
+          <span class="day b">Tue &amp; Thu</span>
+          <span class="stops"><b>Cameron</b> · <b>Mouton Cove</b> · <b>Abbeville</b> — call to confirm window</span>
+        </div>
+        <div class="hol-note">Need a stop added to a route? <a href="#contact" style="color:var(--blue-700);font-weight:600">Contact dispatch</a> and we'll coordinate the nearest pickup.</div>
+      </div>
+
+      <div class="panel holiday">
+        <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg><h3>Holiday Closures</h3></div>
+        <div class="hol-list">
+          <div class="hi"><span>Mardi Gras</span><span class="closed">No Service</span></div>
+          <div class="hi"><span>Good Friday</span><span class="closed">No Service</span></div>
+          <div class="hi"><span>Independence Day</span><span class="closed">No Service</span></div>
+          <div class="hi"><span>Thanksgiving</span><span class="closed">No Service</span></div>
+        </div>
+        <div class="hol-note">Routes resume the next scheduled day. Holiday dates are confirmed and posted each year.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Portal -->
+<section id="portal" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="portal">
+      <div class="portal-grid">
+        <div class="portal-copy">
+          <span class="eyebrow">Client Data Portal</span>
+          <h2>Your reports and requests, in one secure place</h2>
+          <p>Skip the phone tag. Log in to retrieve results, review chain-of-custody records and submit small changes to a pending request — anytime.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Download final reports &amp; QA/QC packages</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Submit minor edits &amp; updates to open requests</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Track samples &amp; chain-of-custody status</li>
+          </ul>
+          <a class="btn btn-green" href="#">Create portal account
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="portal-visual">
+          <div class="login-card">
+            <h4>Client Login</h4>
+            <p>Access your lab results &amp; requests</p>
+            <label>Email</label>
+            <input type="email" placeholder="you@company.com" />
+            <label>Password</label>
+            <input type="password" placeholder="••••••••" />
+            <button class="btn btn-primary" type="button">Sign In
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Accreditations -->
+<section class="accred" id="accreditations">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Accreditations</span>
+      <h2>Independently accredited. Audit-ready by design.</h2>
+      <p>Our methods are accredited under the National Environmental Laboratory Accreditation Program (NELAP) in Louisiana and Texas, with recognition across the Gulf states.</p>
+    </div>
+    <div class="accred-grid">
+      <div class="cert">
+        <div class="imgwrap"><img src="assets/img/cert-tceq.jpg" alt="TCEQ NELAP-recognized laboratory accreditation certificate" /></div>
+        <div class="cap">
+          <div><b>TCEQ — Texas</b><span>NELAP-Recognized · Cert. T104704301</span></div>
+          <a class="view" href="assets/img/cert-tceq.jpg" target="_blank">View <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="imgwrap"><img src="assets/img/cert-ladeq.jpg" alt="Louisiana DEQ LELAP laboratory accreditation certificate" /></div>
+        <div class="cap">
+          <div><b>LDEQ — Louisiana</b><span>LELAP · Primary accrediting authority</span></div>
+          <a class="view" href="assets/img/cert-ladeq.jpg" target="_blank">View <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="accred-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5-3 7-6 7-11V5l-7-3-7 3v6c0 5 2 8 7 11Z"/><path d="M9 12l2 2 4-4"/></svg>
+      <div>Louisiana DEQ serves as our primary NELAP accrediting authority. We are also recognized in <b>Mississippi, Alabama and Georgia</b>, and maintain TCEQ accreditation for work performed in Texas.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="eyebrow">Contact Us</span>
+        <h2>Let's talk about your sampling project</h2>
+        <p class="sub">Send us a message directly through the form and the right team member will respond — typically within one business day. For urgent pickups, call us toll-free.</p>
+        <div class="info-list">
+          <div class="info">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div class="t"><span>Laboratory</span><b>58485 Pearl Acres Road, Suite D</b><small>Slidell, Louisiana 70461-5400</small></div>
+          </div>
+          <div class="info">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></div>
+            <div class="t"><span>Phone</span><b><a href="tel:18009662788">800-966-2788</a> · <a href="tel:19856462787">985-646-2787</a></b><small>Fax 985-646-2810 · Mon–Fri 8am–5pm CT</small></div>
+          </div>
+          <div class="info">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
+            <div class="t"><span>Email</span><b><a href="mailto:info@eeusa.com">info@eeusa.com</a></b><small>Messages from this form route straight to our team</small></div>
+          </div>
+        </div>
+      </div>
+
+      <form class="form-card" onsubmit="event.preventDefault();this.querySelector('.form-foot').textContent='✓ Thanks — this is a mockup form. Connect it to your email service to go live.';">
+        <h3>Send us a message</h3>
+        <p class="fsub">Tell us what you need tested and we'll follow up with next steps and a quote.</p>
+        <div class="frow">
+          <div class="field"><label>First name</label><input type="text" placeholder="Jane" required /></div>
+          <div class="field"><label>Last name</label><input type="text" placeholder="Doe" required /></div>
+        </div>
+        <div class="frow">
+          <div class="field"><label>Email</label><input type="email" placeholder="jane@company.com" required /></div>
+          <div class="field"><label>Phone</label><input type="tel" placeholder="(985) 555-0199" /></div>
+        </div>
+        <div class="field">
+          <label>How can we help?</label>
+          <select>
+            <option>Request a sample pickup</option>
+            <option>Aquatic toxicity testing</option>
+            <option>GC/MS &amp; chemistry analysis</option>
+            <option>Water quality / freshwater &amp; saltwater</option>
+            <option>Chain of custody / sample drop-off</option>
+            <option>Portal access &amp; reports</option>
+            <option>Other inquiry</option>
+          </select>
+        </div>
+        <div class="field"><label>Message</label><textarea placeholder="Briefly describe your project, sample types, and timeline..."></textarea></div>
+        <button class="btn btn-primary" type="submit">Send Message
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4 20-7Z"/></svg></button>
+        <p class="form-foot">We respect your privacy. Your details are only used to respond to your inquiry.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/img/logo.png" alt="Environmental Enterprises USA logo" />
+        <p>A NELAP-accredited environmental testing laboratory serving the Gulf Coast's energy, municipal and industrial sectors since 1987.</p>
+      </div>
+      <div>
+        <h5>Testing</h5>
+        <ul>
+          <li><a href="#services">Aquatic Toxicity</a></li>
+          <li><a href="#services">GC/MS &amp; Chemistry</a></li>
+          <li><a href="#services">Oil &amp; Grease</a></li>
+          <li><a href="#services">Water Quality</a></li>
+          <li><a href="#services">Biodegradation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Logistics</h5>
+        <ul>
+          <li><a href="#logistics">Chain of Custody</a></li>
+          <li><a href="#schedule">Pickup Routes</a></li>
+          <li><a href="#schedule">Holiday Updates</a></li>
+          <li><a href="#portal">Client Portal</a></li>
+          <li><a href="#accreditations">Accreditations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:18009662788">800-966-2788</a></li>
+          <li><a href="tel:19856462787">985-646-2787</a></li>
+          <li><a href="mailto:info@eeusa.com">info@eeusa.com</a></li>
+          <li><a href="https://maps.google.com/?q=58485+Pearl+Acres+Road+Slidell+LA+70461" target="_blank">Slidell, LA 70461</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Environmental Enterprises USA, Inc. All rights reserved.</span>
+      <div class="badges"><span>NELAP</span><span>LELAP</span><span>TCEQ</span><span>Est. 1987</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var nav=document.querySelector('header.nav');
+    var hero=document.getElementById('top');
+    function update(){
+      var heroBottom=hero.offsetTop+hero.offsetHeight;
+      nav.classList.toggle('scrolled', window.scrollY+nav.offsetHeight>=heroBottom);
+    }
+    window.addEventListener('scroll',update,{passive:true});
+    window.addEventListener('resize',update);
+    update();
+
+    // Mobile drawer
+    var drawer=document.getElementById('mobileDrawer');
+    var overlay=document.getElementById('drawerOverlay');
+    var openBtn=document.getElementById('menuOpen');
+    var closeBtn=document.getElementById('menuClose');
+    function openDrawer(){
+      overlay.hidden=false;
+      requestAnimationFrame(function(){overlay.classList.add('show');drawer.classList.add('open');});
+      drawer.setAttribute('aria-hidden','false');
+      openBtn.setAttribute('aria-expanded','true');
+      document.body.classList.add('drawer-locked');
+    }
+    function closeDrawer(){
+      overlay.classList.remove('show');
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden','true');
+      openBtn.setAttribute('aria-expanded','false');
+      document.body.classList.remove('drawer-locked');
+      setTimeout(function(){overlay.hidden=true;},320);
+    }
+    openBtn.addEventListener('click',openDrawer);
+    closeBtn.addEventListener('click',closeDrawer);
+    overlay.addEventListener('click',closeDrawer);
+    drawer.querySelectorAll('[data-close]').forEach(function(el){el.addEventListener('click',closeDrawer);});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&drawer.classList.contains('open'))closeDrawer();});
+  })();
+</script>
+</body>
+</html>

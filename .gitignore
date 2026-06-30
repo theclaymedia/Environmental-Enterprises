@@ -1,0 +1,10 @@
+# Local editor / harness settings
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs & deps (if any tooling is added later)
+*.log
+node_modules/
