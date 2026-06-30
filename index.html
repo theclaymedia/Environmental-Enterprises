@@ -316,6 +316,7 @@
     padding:7px 16px;border-radius:999px;cursor:pointer;transition:.18s}
   .notice-tab:hover{color:var(--blue-700)}
   .notice-tab.active{color:#fff;background:linear-gradient(135deg,var(--blue-600),var(--blue-700));border-color:transparent}
+  .notice-tab .tab-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#e0564f;margin-left:7px;vertical-align:middle}
   .notice-body{padding:24px}
   .notice-pane{display:none;gap:14px;align-items:flex-start}
   .notice-pane.active{display:flex}
@@ -887,6 +888,29 @@
         panes.forEach(function(p){p.classList.toggle('active',p.getAttribute('data-pane')===key);});
       });
     });
+
+    // --- Option A: reflect Notice Board edits published from the Staff Site Editor ---
+    try{
+      var notice=JSON.parse(localStorage.getItem('eeusa_notice')||'null');
+      if(notice){
+        if(typeof notice.schedule==='string' && notice.schedule){
+          var sp=document.querySelector('.notice-pane.schedule .pane-t p');
+          if(sp) sp.textContent=notice.schedule;
+        }
+        if(Array.isArray(notice.holidays)){
+          var hc=document.querySelector('.notice-pane.holidays .notice-chips');
+          if(hc){hc.innerHTML='';notice.holidays.forEach(function(h){var s=document.createElement('span');s.textContent=h;hc.appendChild(s);});}
+        }
+        var aB=document.querySelector('.notice-pane.alerts .pane-t b');
+        var aP=document.querySelector('.notice-pane.alerts .pane-t p');
+        var aTab=document.querySelector('.notice-tab[data-pane="alerts"]');
+        if(notice.alert && notice.alert.enabled && notice.alert.message){
+          if(aB) aB.textContent='Active alert';
+          if(aP) aP.textContent=notice.alert.message;
+          if(aTab && !aTab.querySelector('.tab-dot')){var d=document.createElement('span');d.className='tab-dot';aTab.appendChild(d);}
+        }
+      }
+    }catch(e){}
   })();
 </script>
 </body>

@@ -264,8 +264,8 @@
       <div class="card">
         <div class="card-h"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg></div><div><h3>Active alert</h3><div class="ch-sub">A banner shown on the site until you turn it off</div></div></div>
         <div class="card-b">
-          <label class="switch" style="margin-bottom:14px"><input type="checkbox" checked /><span class="track"></span><span class="lab">Alert is live on the site</span></label>
-          <div class="field"><label>Alert message</label><input class="input" type="text" value="Route delay: Fourchon pickup running late due to weather." /></div>
+          <label class="switch" style="margin-bottom:14px"><input type="checkbox" id="alertToggle" checked /><span class="track"></span><span class="lab">Alert is live on the site</span></label>
+          <div class="field"><label>Alert message</label><input class="input" id="alertMsg" type="text" value="Route delay: Fourchon pickup running late due to weather." /></div>
           <div class="hint">Keep it short — this appears in the Alerts tab of the notice board.</div>
         </div>
       </div>
@@ -289,11 +289,11 @@
       <div class="card">
         <div class="card-h"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Schedule note</h3><div class="ch-sub">Shown in the Schedule tab of the notice board</div></div></div>
         <div class="card-b">
-          <textarea class="input" rows="3">Free pickup and delivery on designated days across our shore-base routes. Samples accepted 24/7 — call 985-960-2313 thirty minutes ahead for after-hours delivery.</textarea>
+          <textarea class="input" id="scheduleNote" rows="3">Free pickup and delivery on designated days across our shore-base routes. Samples accepted 24/7 — call 985-960-2313 thirty minutes ahead for after-hours delivery.</textarea>
         </div>
         <div class="card-foot">
           <span class="meta">Last published: Today, 7:42 AM</span>
-          <button class="btn btn-green js-publish" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Publish to live site</button>
+          <button class="btn btn-green js-publish" id="publishNotice" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Publish to live site</button>
         </div>
       </div>
     </section>
@@ -396,6 +396,13 @@
 
     // Holiday chips
     var holChips=document.getElementById('holChips');
+    function makeChip(label){
+      var chip=document.createElement('span');
+      chip.className='chip';
+      chip.appendChild(document.createTextNode(label+' '));
+      chip.insertAdjacentHTML('beforeend','<button aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg></button>');
+      return chip;
+    }
     holChips.addEventListener('click',function(e){
       var btn=e.target.closest('button');
       if(btn) btn.closest('.chip').remove();
@@ -404,15 +411,45 @@
       var input=document.getElementById('holInput');
       var val=input.value.trim();
       if(!val) return;
-      var chip=document.createElement('span');
-      chip.className='chip';
-      chip.innerHTML=val.replace(/</g,'&lt;')+' <button aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg></button>';
-      holChips.appendChild(chip);
+      holChips.appendChild(makeChip(val));
       input.value='';
       input.focus();
     }
     document.getElementById('holAdd').addEventListener('click',addHoliday);
     document.getElementById('holInput').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();addHoliday();}});
+
+    // --- Option A: sync Notice Board to the live homepage via localStorage ---
+    var STORE_KEY='eeusa_notice';
+    function readHolidays(){
+      return Array.prototype.map.call(holChips.querySelectorAll('.chip'),function(c){return c.textContent.trim();}).filter(Boolean);
+    }
+    // Hydrate the editor from the last published state
+    try{
+      var saved=JSON.parse(localStorage.getItem(STORE_KEY)||'null');
+      if(saved){
+        if(saved.alert){
+          document.getElementById('alertToggle').checked=!!saved.alert.enabled;
+          if(typeof saved.alert.message==='string') document.getElementById('alertMsg').value=saved.alert.message;
+        }
+        if(typeof saved.schedule==='string') document.getElementById('scheduleNote').value=saved.schedule;
+        if(Array.isArray(saved.holidays)){
+          holChips.innerHTML='';
+          saved.holidays.forEach(function(h){holChips.appendChild(makeChip(h));});
+        }
+      }
+    }catch(e){}
+    // Publish Notice Board -> save for the homepage to read
+    var publishNotice=document.getElementById('publishNotice');
+    if(publishNotice){
+      publishNotice.addEventListener('click',function(){
+        var data={
+          alert:{enabled:document.getElementById('alertToggle').checked,message:document.getElementById('alertMsg').value.trim()},
+          holidays:readHolidays(),
+          schedule:document.getElementById('scheduleNote').value.trim()
+        };
+        try{localStorage.setItem(STORE_KEY,JSON.stringify(data));}catch(e){}
+      });
+    }
 
     // Routes add/remove
     var routeBody=document.getElementById('routeBody');
