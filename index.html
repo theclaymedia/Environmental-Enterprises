@@ -164,7 +164,11 @@
   .services{background:var(--bg)}
   .grid-svc{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
   .svc{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:.2s;position:relative;overflow:hidden}
-  .svc::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:linear-gradient(90deg,var(--blue-500),var(--green-500));opacity:0;transition:.2s}
+  .svc::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.6px;pointer-events:none;
+    background:linear-gradient(120deg,var(--blue-500),var(--green-500));
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;
+    mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;
+    opacity:0;transition:opacity .2s}
   .svc:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:transparent}
   .svc:hover::before{opacity:1}
   .svc .ic{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;
@@ -288,10 +292,100 @@
   .foot-bottom .badges{display:flex;gap:10px}
   .foot-bottom .badges span{background:rgba(255,255,255,.08);padding:4px 12px;border-radius:999px;font-weight:600;color:#cfe6f2;font-size:.78rem}
 
+  /* Hero eyebrow (kicker) */
+  .hero-kicker{display:inline-block;font-size:.82rem;font-weight:600;letter-spacing:.04em;color:#bfe9c9;margin-bottom:18px;
+    border-left:2px solid var(--green-500);padding-left:12px;text-align:left}
+
+  /* Notice board */
+  .notice{background:#fff;border-bottom:1px solid var(--line)}
+  .notice .wrap{padding:34px 24px}
+  .notice-card{background:linear-gradient(180deg,var(--blue-50),#fff);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow-sm);overflow:hidden}
+  .notice-head{display:flex;align-items:center;gap:14px;padding:18px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .notice-head .nb-ic{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--blue-600),var(--green-600));
+    display:flex;align-items:center;justify-content:center;flex:none}
+  .notice-head .nb-ic svg{width:22px;height:22px;color:#fff}
+  .notice-head h3{font-size:1.15rem;color:var(--blue-900);margin-right:auto}
+  .notice-tabs{display:flex;gap:6px}
+  .notice-tab{font-size:.86rem;font-weight:600;color:var(--muted);background:#fff;border:1px solid var(--line);
+    padding:7px 16px;border-radius:999px;cursor:pointer;transition:.18s}
+  .notice-tab:hover{color:var(--blue-700)}
+  .notice-tab.active{color:#fff;background:linear-gradient(135deg,var(--blue-600),var(--blue-700));border-color:transparent}
+  .notice-body{padding:24px}
+  .notice-pane{display:none;gap:14px;align-items:flex-start}
+  .notice-pane.active{display:flex}
+  .notice-pane .pane-ic{width:38px;height:38px;border-radius:10px;background:var(--blue-100);display:flex;align-items:center;justify-content:center;flex:none}
+  .notice-pane .pane-ic svg{width:20px;height:20px;color:var(--blue-700)}
+  .notice-pane.alerts .pane-ic{background:#f5eefb}
+  .notice-pane.alerts .pane-ic svg{color:var(--plum)}
+  .notice-pane.holidays .pane-ic{background:#fce8ea}
+  .notice-pane.holidays .pane-ic svg{color:#b23a48}
+  .notice-pane .pane-t b{display:block;color:var(--blue-900);font-size:1.02rem;font-family:"Fraunces",serif;margin-bottom:4px}
+  .notice-pane .pane-t p{color:var(--muted);font-size:.96rem}
+  .notice-pane .pane-t a{color:var(--blue-700);font-weight:600}
+  .notice-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .notice-chips span{font-size:.78rem;font-weight:600;color:#b23a48;background:#fce8ea;border:1px solid #f6d4d8;padding:4px 11px;border-radius:999px}
+
+  /* Process steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:46px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;position:relative;box-shadow:var(--shadow-sm)}
+  .step .num{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--blue-600),var(--blue-700));color:#fff;
+    font-family:"Fraunces",serif;font-weight:700;font-size:1.2rem;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .step h3{font-size:1.12rem;color:var(--blue-900)}
+  .step p{color:var(--muted);font-size:.95rem;margin-top:9px}
+  .step p a{color:var(--blue-700);font-weight:600}
+
+  /* Good-to-know panel */
+  .gtk{padding:8px 26px 20px}
+  .gtk .gi{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed var(--line)}
+  .gtk .gi:last-child{border-bottom:0}
+  .gtk .gi svg{width:20px;height:20px;color:var(--green-600);flex:none;margin-top:2px}
+  .gtk .gi b{color:var(--blue-900);font-size:.95rem;display:block}
+  .gtk .gi span{color:var(--muted);font-size:.9rem}
+
+  /* About / Who We Are */
+  .about{background:#fff}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .about-copy h2{font-size:clamp(1.9rem,3.2vw,2.6rem);color:var(--blue-900);margin-top:14px}
+  .about-copy p{color:var(--muted);margin-top:16px;font-size:1.02rem}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+  .about-stats .as{background:var(--blue-50);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .about-stats .as b{font-family:"Fraunces",serif;font-size:1.7rem;color:var(--blue-700);display:block}
+  .about-stats .as span{font-size:.86rem;color:var(--muted)}
+  .about-visual{position:relative}
+  .about-visual img{border-radius:var(--radius);box-shadow:var(--shadow-lg);width:100%;height:520px;object-fit:cover}
+  .about-badge{position:absolute;left:-22px;bottom:32px;background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:18px 22px;box-shadow:var(--shadow);max-width:230px}
+  .about-badge b{font-family:"Fraunces",serif;color:var(--blue-900);font-size:1.05rem;display:block}
+  .about-badge span{font-size:.86rem;color:var(--muted)}
+
+  /* CTA band */
+  .cta-band{background:linear-gradient(120deg,var(--green-700),var(--blue-700))}
+  .cta-band .wrap{padding:56px 24px;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap}
+  .cta-band h2{color:#fff;font-size:clamp(1.6rem,2.6vw,2.2rem);max-width:620px}
+  .cta-band p{color:#e3f1f9;margin-top:10px}
+  .cta-band .cta-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .cta-band .btn-white{background:#fff;color:var(--blue-700)}
+  .cta-band .btn-white:hover{transform:translateY(-2px)}
+
+  /* Team directory */
+  .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+  .tm{display:flex;gap:13px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .tm .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--blue-600),var(--green-600));color:#fff;
+    font-weight:700;font-size:.95rem;display:flex;align-items:center;justify-content:center;flex:none;font-family:"Fraunces",serif}
+  .tm .tt span{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;display:block}
+  .tm .tt b{color:var(--blue-900);font-size:.96rem;display:block;margin:1px 0}
+  .tm .tt a{color:var(--blue-700);font-size:.85rem;font-weight:500}
+  .tm .tt a:hover{color:var(--blue-600)}
+
   /* Responsive */
   @media(max-width:980px){
     .grid-svc,.grid-logi{grid-template-columns:1fr 1fr}
-    .sched-wrap,.portal-grid,.accred-grid,.contact-grid,.foot-grid{grid-template-columns:1fr}
+    .sched-wrap,.portal-grid,.accred-grid,.contact-grid,.foot-grid,.about-grid{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .about-badge{position:static;max-width:none;margin-top:16px;left:0}
+    .about-visual img{height:340px}
+    .notice-head h3{margin-right:0;width:100%}
     .portal-visual{min-height:300px}
     .login-card{position:static;transform:none;width:auto;margin:24px}
     nav.links{display:none}
@@ -300,7 +394,8 @@
   }
   @media(max-width:620px){
     section{padding:64px 0}
-    .grid-svc,.grid-logi,.frow{grid-template-columns:1fr}
+    .grid-svc,.grid-logi,.frow,.team-grid{grid-template-columns:1fr}
+    .cta-band .wrap{flex-direction:column;align-items:flex-start}
     /* Slim utility bar: keep one phone + portal pill, drop the rest */
     .topbar .wrap{gap:10px}
     .topbar .tb-left{gap:0;min-width:0}
@@ -339,10 +434,10 @@
       <span class="bt"><b>Environmental Enterprises</b><span>USA, Inc.</span></span>
     </a>
     <nav class="links">
-      <a href="#services">Testing &amp; Analysis</a>
-      <a href="#logistics">Sampling Logistics</a>
+      <a href="#services">What We Test</a>
+      <a href="#logistics">Send Samples</a>
       <a href="#accreditations">Accreditations</a>
-      <a href="#portal">Data Portal</a>
+      <a href="#about">Who We Are</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-cta">
@@ -364,10 +459,12 @@
     <button class="drawer-close" id="menuClose" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
   </div>
   <nav class="drawer-links">
-    <a href="#services" data-close>Testing &amp; Analysis</a>
-    <a href="#logistics" data-close>Sampling Logistics</a>
+    <a href="#services" data-close>What We Test</a>
+    <a href="#logistics" data-close>How to Send Samples</a>
+    <a href="#notice" data-close>Notice Board</a>
     <a href="#accreditations" data-close>Accreditations</a>
-    <a href="#portal" data-close>Data Portal</a>
+    <a href="#about" data-close>Who We Are</a>
+    <a href="#portal" data-close>Client Portal</a>
     <a href="#contact" data-close>Contact</a>
   </nav>
   <a class="btn btn-primary drawer-cta" href="#contact" data-close>Request a Pickup
@@ -388,22 +485,19 @@
   </div>
   <div class="wrap">
     <div class="hero-inner">
-      <h1>Precise environmental testing<br><span class="accent">you can build decisions on.</span></h1>
-      <p class="lead">For more than 35 years, the Gulf Coast's oil &amp; gas, municipal and industrial partners have trusted us for accurate aquatic toxicity, chemistry and water-quality analysis — delivered on a schedule you can count on.</p>
-      <p class="scope">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
-        A dedicated analytical testing laboratory — focused on lab science, not engineering services.
-      </p>
+      <span class="hero-kicker">Aquatic Toxicity Testing &amp; Environmental Data Management</span>
+      <h1>Trusted testing.<br><span class="accent">Documented quality. Reliable results.</span></h1>
+      <p class="lead">Environmental Enterprises USA is a NELAP-accredited laboratory serving the oil &amp; gas industry, municipalities, refineries, and industrial plants. With more than 13,500 square feet of laboratory space and a highly qualified team, we have the experience and capacity to meet your testing and data management needs.</p>
       <div class="hero-cta">
-        <a class="btn btn-green" href="#contact">Schedule Sample Pickup
+        <a class="btn btn-green" href="#services">What We Test
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="#services">Explore Our Testing</a>
+        <a class="btn btn-ghost" href="#logistics">How to Send Samples</a>
       </div>
       <div class="hero-stats">
-        <div class="s"><b>1987</b><span>Established in Louisiana</span></div>
-        <div class="s"><b>13,500+</b><span>Sq. ft. of lab space</span></div>
-        <div class="s"><b>NELAP</b><span>LA &amp; TX accredited</span></div>
-        <div class="s"><b>Global</b><span>Clients on 5 continents</span></div>
+        <div class="s"><b>NELAP</b><span>Accredited — Louisiana &amp; Texas</span></div>
+        <div class="s"><b>1987</b><span>Serving clients since</span></div>
+        <div class="s"><b>13,500+</b><span>Sq. ft. of laboratory space</span></div>
+        <div class="s"><b>100+</b><span>Clients across the U.S. &amp; abroad</span></div>
       </div>
     </div>
   </div>
@@ -422,56 +516,76 @@
   </div>
 </div>
 
+<!-- Notice board -->
+<div class="notice" id="notice">
+  <div class="wrap">
+    <div class="notice-card">
+      <div class="notice-head">
+        <span class="nb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2Z"/></svg></span>
+        <h3>Notice Board</h3>
+        <div class="notice-tabs">
+          <button class="notice-tab active" data-pane="schedule">Schedule</button>
+          <button class="notice-tab" data-pane="holidays">Holidays</button>
+          <button class="notice-tab" data-pane="alerts">Alerts</button>
+        </div>
+      </div>
+      <div class="notice-body">
+        <div class="notice-pane schedule active" data-pane="schedule">
+          <span class="pane-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <div class="pane-t">
+            <b>Free pickup &amp; delivery on designated days</b>
+            <p>Free pickup and delivery on designated days across our shore-base routes. Samples accepted 24/7 — call <a href="tel:19859602313">985-960-2313</a> thirty minutes ahead for after-hours delivery.</p>
+          </div>
+        </div>
+        <div class="notice-pane holidays" data-pane="holidays">
+          <span class="pane-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></span>
+          <div class="pane-t">
+            <b>No regular runs on these holidays</b>
+            <p>Routes pause for the following holidays and resume the next scheduled day.</p>
+            <div class="notice-chips"><span>Mardi Gras</span><span>Good Friday</span><span>Independence Day</span><span>Thanksgiving</span></div>
+          </div>
+        </div>
+        <div class="notice-pane alerts" data-pane="alerts">
+          <span class="pane-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+          <div class="pane-t">
+            <b>Route changes, weather &amp; shore-base notices</b>
+            <p>Route changes, weather updates, and shore-base notices are posted here. Check back before scheduling during storm season.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Services -->
 <section class="services" id="services">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Testing &amp; Analysis</span>
-      <h2>A full scope of environmental laboratory services</h2>
-      <p>From acute aquatic toxicity to trace-level chemistry, our accredited methods support permit compliance, discharge monitoring and product evaluation across the energy and water sectors.</p>
+    <div class="sec-head center">
+      <span class="eyebrow">What We Test</span>
+      <h2>Testing built around your permit</h2>
+      <p>From whole-effluent toxicity to oil &amp; grease and GC/MS analysis, our methods follow EPA methodology and NELAP standards, with organisms cultured in-house for quality and immediate availability.</p>
     </div>
     <div class="grid-svc">
 
       <div class="svc">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3v6l-5 9a2 2 0 0 0 1.8 3h12.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7 3h10M8.5 14h7"/></svg></div>
-        <h3>Aquatic Toxicity</h3>
-        <p>Acute and chronic whole-effluent toxicity testing on marine and freshwater organisms for NPDES and discharge compliance.</p>
-        <div class="tags"><span>Produced Water</span><span>CTS Toxicity</span><span>Sediment</span></div>
+        <h3>Aquatic Toxicity Testing</h3>
+        <p>Acute and chronic whole-effluent toxicity (WET) testing with indicator organisms cultured in-house — sized to the periods and dilutions specified in your discharge permit.</p>
+        <div class="tags"><span>Freshwater</span><span>Saltwater</span><span>Produced Water</span><span>Sediment</span><span>Drilling Fluids</span><span>NCP</span><span>CTS</span></div>
       </div>
 
       <div class="svc">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l2-7 4 14 2-7h4"/></svg></div>
-        <h3>GC/MS &amp; Chemistry</h3>
-        <p>Gas chromatography / mass spectrometry and wet chemistry for precise identification and quantitation of organic compounds.</p>
-        <div class="tags"><span>GC/MS</span><span>Oil &amp; Grease</span><span>NCP Testing</span></div>
-      </div>
-
-      <div class="svc">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5-3 7-6 7-11V5l-7-3-7 3v6c0 5 2 8 7 11Z"/><path d="M12 8v6M9 11h6"/></svg></div>
-        <h3>Water Quality Testing</h3>
-        <p>Comprehensive freshwater and saltwater analysis for municipalities, refineries and industrial discharge programs.</p>
-        <div class="tags"><span>Freshwater</span><span>Saltwater</span><span>Drilling Fluids</span></div>
-      </div>
-
-      <div class="svc">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c2-3 5-4 7-2s4 4 6 2 5-2 7 0"/><path d="M2 17c2-3 5-4 7-2s4 4 6 2 5-2 7 0"/></svg></div>
-        <h3>Biodegradation</h3>
-        <p>Standardized biodegradation studies evaluating the environmental fate of chemical products and additives.</p>
-        <div class="tags"><span>Closed Bottle</span><span>OECD Methods</span></div>
-      </div>
-
-      <div class="svc">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v7a6 6 0 0 0 12 0V3"/><path d="M6 14a6 6 0 0 0 12 0"/></svg></div>
-        <h3>Aquaculture &amp; Organisms</h3>
-        <p>In-house culturing of healthy, consistent test organisms — the foundation of reliable, reproducible toxicity results.</p>
-        <div class="tags"><span>Cultured In-House</span><span>QA Verified</span></div>
+        <h3>Oil &amp; Grease and GC/MS Analysis</h3>
+        <p>Specialized analytical chemistry following EPA methodology — precise identification and quantitation to support compliance and product evaluation.</p>
+        <div class="tags"><span>Oil &amp; Grease</span><span>GC/MS Testing</span><span>Biodegradation</span></div>
       </div>
 
       <div class="svc">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h8M8 17h5"/></svg></div>
-        <h3>Data Management</h3>
-        <p>Defensible, well-documented reporting with full QA/QC packages and electronic delivery for your records and regulators.</p>
-        <div class="tags"><span>QA/QC</span><span>e-Reporting</span><span>Audit Ready</span></div>
+        <h3>Compliance Data Management</h3>
+        <p>We manage and report offshore water-permit compliance data for the EPA, LA DEQ and Texas RRC — from monitoring and record keeping to electronic submittals.</p>
+        <div class="tags"><span>DMR Prep</span><span>eNOI / eNOT</span><span>Monitoring</span><span>Consulting</span></div>
       </div>
 
     </div>
@@ -483,60 +597,85 @@
   <div class="wrap">
     <div class="sec-head center">
       <span class="eyebrow">Sampling Logistics</span>
-      <h2>From your site to our bench — handled with care</h2>
-      <p>Documented chain of custody, scheduled regional pickup routes and clear holiday updates keep your samples valid and your timelines on track.</p>
+      <h2>How to send samples</h2>
+      <p>We provide sample kits with containers, sampling instructions, and a chain-of-custody form, and coordinate sampling events to meet your needs and your samples' specific holding times.</p>
     </div>
 
-    <div class="grid-logi">
-      <div class="lcard coc">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M9 3v3h6V3"/></svg></div>
-        <h3>Chain of Custody</h3>
-        <p>Every sample is tracked with a complete, signature-verified chain of custody — protecting the integrity and legal defensibility of your results from collection to final report.</p>
-        <a class="more" href="#contact">Download COC form <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Get on our calendar</h3>
+        <p>Call Jennifer Dupont, our Sampling Logistics Supervisor, to get set up — <a href="tel:18009662788">1-800-966-2788</a>.</p>
       </div>
-
-      <div class="lcard del">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-        <h3>Sample Delivery &amp; Pickup</h3>
-        <p>Our regular regional routes pick up samples directly from your facility across South Louisiana — keeping hold times intact and reducing your shipping burden.</p>
-        <a class="more" href="#schedule">View pickup schedule <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Receive your test kit</h3>
+        <p>We prepare and ship your sample kit with containers, instructions, and a chain-of-custody form ready to complete.</p>
       </div>
-
-      <div class="lcard hol">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></div>
-        <h3>Holiday Updates</h3>
-        <p>Plan ahead with confidence. We post route changes and laboratory closures for every holiday, so you always know exactly when to schedule your sampling.</p>
-        <a class="more" href="#schedule">See holiday closures <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Send your samples</h3>
+        <p>Mail your samples with the completed chain-of-custody form, or schedule a free pickup on one of our shore-base routes.</p>
       </div>
     </div>
 
     <div class="sched-wrap" id="schedule">
       <div class="panel">
-        <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>Weekly Pickup Routes</h3></div>
+        <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>Free pickup &amp; delivery — latest pickup times</h3></div>
         <div class="route">
           <span class="day a">Wed &amp; Fri</span>
-          <span class="stops"><b>Patterson</b> 9:00a · <b>Venice</b> 10:30a · <b>Houma</b> 11:00a · <b>Boothville</b> 11:00a</span>
+          <span class="stops"><b>Patterson</b> 0900 · <b>Houma</b> 1100</span>
         </div>
         <div class="route">
           <span class="day b">Tue &amp; Thu</span>
-          <span class="stops"><b>Grand Isle</b> 9:30a · <b>Fourchon</b> 11:00a · <b>Galliano</b> 12:30p</span>
+          <span class="stops"><b>Grand Isle</b> 0930 · <b>Fourchon</b> 1100 · <b>Galliano</b> 1230</span>
         </div>
         <div class="route">
-          <span class="day b">Tue &amp; Thu</span>
-          <span class="stops"><b>Cameron</b> · <b>Mouton Cove</b> · <b>Abbeville</b> — call to confirm window</span>
+          <span class="day a">Thursday</span>
+          <span class="stops"><b>Venice</b> 1030 · <b>Boothville</b> 1100</span>
         </div>
-        <div class="hol-note">Need a stop added to a route? <a href="#contact" style="color:var(--blue-700);font-weight:600">Contact dispatch</a> and we'll coordinate the nearest pickup.</div>
+        <div class="route">
+          <span class="day b">Wednesday</span>
+          <span class="stops"><b>Cameron</b> 0900* · <b>ICY</b> 1130 · <b>Mouton Cove</b> 1200 · <b>Abbeville</b> 1230</span>
+        </div>
+        <div class="hol-note">*Cameron subject to availability — please call ahead. Can't use our free route? We recommend FedEx or Hot-Shot; pickups from displaced shore bases are available at quoted rates.</div>
       </div>
 
-      <div class="panel holiday">
-        <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg><h3>Holiday Closures</h3></div>
-        <div class="hol-list">
-          <div class="hi"><span>Mardi Gras</span><span class="closed">No Service</span></div>
-          <div class="hi"><span>Good Friday</span><span class="closed">No Service</span></div>
-          <div class="hi"><span>Independence Day</span><span class="closed">No Service</span></div>
-          <div class="hi"><span>Thanksgiving</span><span class="closed">No Service</span></div>
+      <div class="panel">
+        <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><h3>Good to know</h3></div>
+        <div class="gtk">
+          <div class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Business hours</b><span>8 AM–5 PM, Monday–Friday</span></div></div>
+          <div class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg><div><b>After-hours deliveries</b><span>Samples accepted 24/7 — call <a href="tel:19859602313" style="color:var(--blue-700);font-weight:600">985-960-2313</a></span></div></div>
+          <div class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg><div><b>Holidays — no regular runs</b><span>Mardi Gras, Good Friday, Independence Day, Thanksgiving</span></div></div>
+          <div class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5-3 7-6 7-11V5l-7-3-7 3v6c0 5 2 8 7 11Z"/></svg><div><b>Sanitary Wastewater (LAG530000)</b><span>Field flow &amp; pH by EE USA; other analyses subcontracted to an accredited lab</span></div></div>
         </div>
-        <div class="hol-note">Routes resume the next scheduled day. Holiday dates are confirmed and posted each year.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Who We Are -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-copy">
+        <span class="eyebrow">Who We Are</span>
+        <h2>One of the Gulf South's largest aquatic toxicity labs</h2>
+        <p>Founded in April 1987 by Harold A. Loyacano, Jr., Ph.D. to perform acute toxicity testing of drilling fluids for the offshore oil and gas industry, EE USA has grown to cover marine and freshwater toxicity, sediment toxicity, biodegradation, oil &amp; grease, GC/MS analysis, data management, and in-house organism culturing.</p>
+        <p>Our facility — purpose-built in 1995 as an aquatic toxicity testing laboratory — features a private deep-water well, four independent environmental chambers, a fireproof file room, and a backup generator for the entire building. In 2013, founder Harold Loyacano sold the company to David Daniel, a 30-year company veteran and former General Manager.</p>
+        <div class="about-stats">
+          <div class="as"><b>40+</b><span>Pairs of 7-day chronic tests per month</span></div>
+          <div class="as"><b>150</b><span>Acute toxicity tests per month</span></div>
+          <div class="as"><b>100+</b><span>Clients across the U.S.</span></div>
+          <div class="as"><b>4</b><span>Independent environmental chambers</span></div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <img src="assets/img/lab-toxicity.jpg" alt="EE USA technician performing aquatic toxicity testing" />
+        <div class="about-badge">
+          <b>Samples from 4 continents</b>
+          <span>South America, Europe, the Middle East &amp; Asia</span>
+        </div>
       </div>
     </div>
   </div>
@@ -548,15 +687,18 @@
     <div class="portal">
       <div class="portal-grid">
         <div class="portal-copy">
-          <span class="eyebrow">Client Data Portal</span>
-          <h2>Your reports and requests, in one secure place</h2>
-          <p>Skip the phone tag. Log in to retrieve results, review chain-of-custody records and submit small changes to a pending request — anytime.</p>
+          <span class="eyebrow">Client Portal</span>
+          <h2>Manage everything in one secure place</h2>
+          <p>A simple, secure place for active clients to manage the details of working with us — stay current on schedules, request kits, schedule pickups, and pull copies of your data.</p>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Download final reports &amp; QA/QC packages</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Submit minor edits &amp; updates to open requests</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Track samples &amp; chain-of-custody status</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Request a sample kit</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Schedule or adjust a pickup</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Request reports &amp; data — results, DMRs, COCs</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Reorder test organisms in a few clicks</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Update account, shipping &amp; billing details</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Message your contact — lab, logistics, data or accounts</li>
           </ul>
-          <a class="btn btn-green" href="#">Create portal account
+          <a class="btn btn-green" href="#">Request Access
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
         <div class="portal-visual">
@@ -567,7 +709,7 @@
             <input type="email" placeholder="you@company.com" />
             <label>Password</label>
             <input type="password" placeholder="••••••••" />
-            <button class="btn btn-primary" type="button">Sign In
+            <button class="btn btn-primary" type="button">Log In
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg></button>
           </div>
         </div>
@@ -581,8 +723,8 @@
   <div class="wrap">
     <div class="sec-head center">
       <span class="eyebrow">Accreditations</span>
-      <h2>Independently accredited. Audit-ready by design.</h2>
-      <p>Our methods are accredited under the National Environmental Laboratory Accreditation Program (NELAP) in Louisiana and Texas, with recognition across the Gulf states.</p>
+      <h2>Data of known and documented quality</h2>
+      <p>We are accredited under the National Environmental Laboratory Accreditation Program (NELAP) in Louisiana and Texas. Our primary accrediting authority is the state of Louisiana, through LELAP.</p>
     </div>
     <div class="accred-grid">
       <div class="cert">
@@ -602,10 +744,27 @@
     </div>
     <div class="accred-note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5-3 7-6 7-11V5l-7-3-7 3v6c0 5 2 8 7 11Z"/><path d="M9 12l2 2 4-4"/></svg>
-      <div>Louisiana DEQ serves as our primary NELAP accrediting authority. We are also recognized in <b>Mississippi, Alabama and Georgia</b>, and maintain TCEQ accreditation for work performed in Texas.</div>
+      <div>Mississippi, Alabama, and Georgia do not currently participate in NELAP but <b>recognize and accept our accreditation</b>. We continue to pursue accreditation in additional states to meet our clients' needs.</div>
     </div>
   </div>
 </section>
+
+<!-- CTA band -->
+<div class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>Have a permit deadline or a sampling question?</h2>
+      <p>Call or email our team and we'll respond promptly.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-white" href="#contact">Contact Us
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-ghost" href="tel:18009662788">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        Call 800-966-2788</a>
+    </div>
+  </div>
+</div>
 
 <!-- Contact -->
 <section class="contact" id="contact">
@@ -613,21 +772,24 @@
     <div class="contact-grid">
       <div class="contact-info">
         <span class="eyebrow">Contact Us</span>
-        <h2>Let's talk about your sampling project</h2>
-        <p class="sub">Send us a message directly through the form and the right team member will respond — typically within one business day. For urgent pickups, call us toll-free.</p>
+        <h2>Not sure what services you need?</h2>
+        <p class="sub">We're here to help. Give us a call or send us an email and we'll respond promptly.</p>
         <div class="info-list">
           <div class="info">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div class="t"><span>Laboratory</span><b>58485 Pearl Acres Road, Suite D</b><small>Slidell, Louisiana 70461-5400</small></div>
+            <div class="t"><span>Laboratory</span><b>58485 Pearl Acres Rd., Suite D</b><small>Slidell, LA 70461</small></div>
           </div>
           <div class="info">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></div>
-            <div class="t"><span>Phone</span><b><a href="tel:18009662788">800-966-2788</a> · <a href="tel:19856462787">985-646-2787</a></b><small>Fax 985-646-2810 · Mon–Fri 8am–5pm CT</small></div>
+            <div class="t"><span>Phone</span><b><a href="tel:18009662788">800-966-2788</a> · <a href="tel:19856462787">985-646-2787</a></b><small>Fax 985-646-2810 · After-hours delivery 985-960-2313</small></div>
           </div>
-          <div class="info">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
-            <div class="t"><span>Email</span><b><a href="mailto:info@eeusa.com">info@eeusa.com</a></b><small>Messages from this form route straight to our team</small></div>
-          </div>
+        </div>
+        <div class="team-grid">
+          <div class="tm"><span class="av">DD</span><div class="tt"><span>President</span><b>David L. Daniel</b><a href="mailto:ddaniel@eeusa.com">ddaniel@eeusa.com</a></div></div>
+          <div class="tm"><span class="av">JG</span><div class="tt"><span>Laboratory Services</span><b>Jennifer Griffith</b><a href="mailto:jgriffith@eeusa.com">jgriffith@eeusa.com</a></div></div>
+          <div class="tm"><span class="av">JD</span><div class="tt"><span>Sampling Logistics</span><b>Jennifer Dupont</b><a href="mailto:jdupont@eeusa.com">jdupont@eeusa.com</a></div></div>
+          <div class="tm"><span class="av">KN</span><div class="tt"><span>Data Management</span><b>Kim Norton</b><a href="mailto:knorton@eeusa.com">knorton@eeusa.com</a></div></div>
+          <div class="tm"><span class="av">KK</span><div class="tt"><span>Accounts Receivable</span><b>Katie Kendrick</b><a href="mailto:kkendrick@eeusa.com">kkendrick@eeusa.com</a></div></div>
         </div>
       </div>
 
@@ -645,12 +807,12 @@
         <div class="field">
           <label>How can we help?</label>
           <select>
-            <option>Request a sample pickup</option>
+            <option>Request a sample kit or pickup</option>
             <option>Aquatic toxicity testing</option>
-            <option>GC/MS &amp; chemistry analysis</option>
-            <option>Water quality / freshwater &amp; saltwater</option>
-            <option>Chain of custody / sample drop-off</option>
-            <option>Portal access &amp; reports</option>
+            <option>Oil &amp; grease / GC/MS analysis</option>
+            <option>Compliance &amp; data management</option>
+            <option>Accreditation &amp; scope questions</option>
+            <option>Client portal access</option>
             <option>Other inquiry</option>
           </select>
         </div>
@@ -669,35 +831,36 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <img src="assets/img/logo.png" alt="Environmental Enterprises USA logo" />
-        <p>A NELAP-accredited environmental testing laboratory serving the Gulf Coast's energy, municipal and industrial sectors since 1987.</p>
+        <p>A NELAP-accredited aquatic toxicity testing and environmental data-management laboratory serving the oil &amp; gas, municipal and industrial sectors since 1987.</p>
+        <p style="margin-top:14px;font-size:.86rem">Interested in joining the EE USA team? Email <a href="mailto:ddaniel@eeusa.com" style="color:#bfe9c9;font-weight:600">ddaniel@eeusa.com</a>.</p>
       </div>
       <div>
-        <h5>Testing</h5>
+        <h5>What We Test</h5>
         <ul>
-          <li><a href="#services">Aquatic Toxicity</a></li>
-          <li><a href="#services">GC/MS &amp; Chemistry</a></li>
-          <li><a href="#services">Oil &amp; Grease</a></li>
-          <li><a href="#services">Water Quality</a></li>
-          <li><a href="#services">Biodegradation</a></li>
+          <li><a href="#services">Aquatic Toxicity Testing</a></li>
+          <li><a href="#services">Oil &amp; Grease &amp; GC/MS</a></li>
+          <li><a href="#services">Compliance Data Management</a></li>
+          <li><a href="#accreditations">Accreditations</a></li>
+          <li><a href="#about">Who We Are</a></li>
         </ul>
       </div>
       <div>
         <h5>Logistics</h5>
         <ul>
-          <li><a href="#logistics">Chain of Custody</a></li>
+          <li><a href="#logistics">How to Send Samples</a></li>
           <li><a href="#schedule">Pickup Routes</a></li>
-          <li><a href="#schedule">Holiday Updates</a></li>
+          <li><a href="#notice">Notice Board</a></li>
           <li><a href="#portal">Client Portal</a></li>
-          <li><a href="#accreditations">Accreditations</a></li>
+          <li><a href="tel:19859602313">After-hours: 985-960-2313</a></li>
         </ul>
       </div>
       <div>
         <h5>Contact</h5>
         <ul>
-          <li><a href="tel:18009662788">800-966-2788</a></li>
-          <li><a href="tel:19856462787">985-646-2787</a></li>
-          <li><a href="mailto:info@eeusa.com">info@eeusa.com</a></li>
-          <li><a href="https://maps.google.com/?q=58485+Pearl+Acres+Road+Slidell+LA+70461" target="_blank">Slidell, LA 70461</a></li>
+          <li><a href="tel:18009662788">Toll Free: 800-966-2788</a></li>
+          <li><a href="tel:19856462787">Local: 985-646-2787</a></li>
+          <li><a href="mailto:ddaniel@eeusa.com">ddaniel@eeusa.com</a></li>
+          <li><a href="https://maps.google.com/?q=58485+Pearl+Acres+Road+Slidell+LA+70461" target="_blank">58485 Pearl Acres Rd., Slidell, LA</a></li>
         </ul>
       </div>
     </div>
@@ -745,6 +908,17 @@
     overlay.addEventListener('click',closeDrawer);
     drawer.querySelectorAll('[data-close]').forEach(function(el){el.addEventListener('click',closeDrawer);});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&drawer.classList.contains('open'))closeDrawer();});
+
+    // Notice board tabs
+    var tabs=document.querySelectorAll('.notice-tab');
+    var panes=document.querySelectorAll('.notice-pane');
+    tabs.forEach(function(tab){
+      tab.addEventListener('click',function(){
+        var key=tab.getAttribute('data-pane');
+        tabs.forEach(function(t){t.classList.toggle('active',t===tab);});
+        panes.forEach(function(p){p.classList.toggle('active',p.getAttribute('data-pane')===key);});
+      });
+    });
   })();
 </script>
 </body>
