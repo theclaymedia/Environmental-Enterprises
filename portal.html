@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Staff Site Editor — Environmental Enterprises USA</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --blue-900:#0f3a52;--blue-800:#13506f;--blue-700:#1d6f9e;--blue-600:#2e8bbf;--blue-500:#4ea7d6;
+    --blue-100:#e7f3fb;--blue-50:#f1f8fd;--green-700:#3f9a55;--green-600:#56b86c;--green-500:#71c98a;
+    --green-100:#e8f6ec;--plum:#6a3d8f;--ink:#143341;--muted:#5b7686;--line:#dde9f1;--bg:#eef5fa;
+    --shadow-sm:0 1px 3px rgba(20,51,65,.07),0 1px 2px rgba(20,51,65,.04);
+    --shadow:0 10px 30px -12px rgba(20,51,65,.22);--shadow-lg:0 24px 60px -24px rgba(20,51,65,.34);
+    --radius:16px;--radius-sm:11px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.55}
+  h1,h2,h3,h4{font-family:"Fraunces",Georgia,serif;margin:0;font-weight:600;letter-spacing:-.01em;line-height:1.15}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  input,select,textarea,button{font-family:inherit}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:.92rem;padding:11px 18px;border-radius:10px;border:1.5px solid transparent;cursor:pointer;transition:.18s}
+  .btn svg{width:17px;height:17px}
+  .btn-primary{background:linear-gradient(135deg,var(--blue-600),var(--blue-700));color:#fff;box-shadow:0 8px 18px -8px rgba(29,111,158,.6)}
+  .btn-primary:hover{transform:translateY(-1px)}
+  .btn-green{background:linear-gradient(135deg,var(--green-600),var(--green-700));color:#fff;box-shadow:0 8px 18px -8px rgba(63,154,85,.55)}
+  .btn-green:hover{transform:translateY(-1px)}
+  .btn-ghost{background:#fff;color:var(--blue-700);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--blue-500)}
+  label{font-size:.8rem;font-weight:600;color:var(--ink);display:block;margin-bottom:7px}
+  .input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font-size:.93rem;color:var(--ink);background:#fcfeff}
+  .input:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 3px var(--blue-100)}
+
+  /* ---------- Login ---------- */
+  .login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
+  .login::before{content:"";position:fixed;inset:0;background:linear-gradient(120deg,var(--blue-900),var(--blue-700) 55%,var(--green-700));z-index:-2}
+  .login::after{content:"";position:fixed;inset:0;background:radial-gradient(900px 500px at 80% 20%,rgba(255,255,255,.12),transparent);z-index:-1}
+  .login-card{background:#fff;border-radius:22px;box-shadow:var(--shadow-lg);width:min(94vw,420px);padding:38px 36px}
+  .login-brand{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+  .login-brand img{height:46px}
+  .login-brand b{font-family:"Fraunces",serif;font-size:1.04rem;color:var(--blue-900);display:block;line-height:1.1}
+  .login-brand span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-700);font-weight:700}
+  .login-card h1{font-size:1.5rem;color:var(--blue-900)}
+  .login-card .sub{color:var(--muted);font-size:.9rem;margin:6px 0 24px}
+  .login-card .field{margin-bottom:16px}
+  .login-card .btn{width:100%;margin-top:6px}
+  .login-foot{margin-top:20px;display:flex;align-items:center;justify-content:space-between;font-size:.84rem}
+  .login-foot a{color:var(--blue-700);font-weight:600;display:inline-flex;align-items:center;gap:6px}
+  .login-foot a svg{width:15px;height:15px}
+  .demo-note{margin-top:18px;font-size:.78rem;color:var(--muted);background:var(--blue-50);border:1px solid var(--line);border-radius:10px;padding:10px 13px;text-align:center}
+
+  /* ---------- App shell ---------- */
+  .app{display:none;min-height:100vh;grid-template-columns:248px 1fr;grid-template-rows:auto 1fr}
+  .app.show{display:grid}
+  .topbar{grid-column:1 / -1;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px;padding:0 22px;height:64px;position:sticky;top:0;z-index:20}
+  .topbar .tb-brand{display:flex;align-items:center;gap:10px}
+  .topbar .tb-brand img{height:36px}
+  .topbar .tb-brand b{font-family:"Fraunces",serif;color:var(--blue-900);font-size:.98rem}
+  .topbar .tb-tag{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-700);background:var(--green-100);padding:4px 9px;border-radius:999px}
+  .topbar .tb-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+  .tb-status{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;color:var(--muted)}
+  .tb-status .dot{width:8px;height:8px;border-radius:50%;background:var(--green-600);box-shadow:0 0 0 3px rgba(86,184,108,.25)}
+  .tb-link{font-size:.86rem;font-weight:600;color:var(--blue-700);display:inline-flex;align-items:center;gap:6px}
+  .tb-link svg{width:15px;height:15px}
+  .avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue-600),var(--green-600));color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;font-family:"Fraunces",serif}
+
+  /* Sidebar */
+  .side{background:#fff;border-right:1px solid var(--line);padding:18px 14px;display:flex;flex-direction:column;gap:4px}
+  .side .sgroup{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:14px 12px 8px}
+  .nav-item{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:10px;font-weight:600;font-size:.92rem;color:var(--ink);cursor:pointer;transition:.15s;border:1px solid transparent}
+  .nav-item svg{width:19px;height:19px;color:var(--muted);flex:none}
+  .nav-item:hover{background:var(--blue-50)}
+  .nav-item.active{background:linear-gradient(135deg,var(--blue-50),var(--green-100));color:var(--blue-800);border-color:var(--line)}
+  .nav-item.active svg{color:var(--blue-700)}
+  .side-foot{margin-top:auto;padding:12px}
+  .logout{display:flex;align-items:center;gap:9px;color:var(--muted);font-weight:600;font-size:.9rem;cursor:pointer;padding:10px 12px;border-radius:10px}
+  .logout:hover{background:#fbeef0;color:#b23a48}
+  .logout svg{width:18px;height:18px}
+
+  /* Main */
+  .main{padding:30px 34px;overflow-y:auto}
+  .page-head{margin-bottom:24px}
+  .page-head h1{font-size:1.7rem;color:var(--blue-900)}
+  .page-head p{color:var(--muted);font-size:.96rem;margin:6px 0 0}
+  .panel{display:none}
+  .panel.active{display:block}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:20px}
+  .card-h{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  .card-h .ci{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--blue-100),var(--green-100));display:flex;align-items:center;justify-content:center;flex:none}
+  .card-h .ci svg{width:20px;height:20px;color:var(--blue-700)}
+  .card-h h3{font-size:1.08rem;color:var(--blue-900)}
+  .card-h .ch-sub{font-size:.84rem;color:var(--muted);margin-top:1px}
+  .card-b{padding:22px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{margin-bottom:16px}
+  .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+
+  /* toggle */
+  .switch{display:inline-flex;align-items:center;gap:10px;cursor:pointer}
+  .switch input{display:none}
+  .track{width:44px;height:25px;border-radius:999px;background:#cdd9e2;position:relative;transition:.2s}
+  .track::after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:.2s}
+  .switch input:checked + .track{background:var(--green-600)}
+  .switch input:checked + .track::after{transform:translateX(19px)}
+  .switch .lab{font-size:.86rem;font-weight:600;color:var(--ink)}
+
+  /* chips */
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-size:.84rem;font-weight:600;color:#b23a48;background:#fce8ea;border:1px solid #f6d4d8;padding:6px 8px 6px 13px;border-radius:999px}
+  .chip button{background:none;border:0;cursor:pointer;color:#b23a48;display:flex;width:18px;height:18px;border-radius:50%;align-items:center;justify-content:center}
+  .chip button:hover{background:rgba(178,58,72,.15)}
+  .chip button svg{width:13px;height:13px}
+  .add-row{display:flex;gap:10px;margin-top:14px}
+  .add-row .input{flex:1}
+
+  /* routes table */
+  .rtable{width:100%;border-collapse:collapse}
+  .rtable th{text-align:left;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;padding:0 10px 10px}
+  .rtable td{padding:7px 10px;border-top:1px solid var(--line)}
+  .rtable td:first-child{padding-left:0}
+  .rtable .input{padding:8px 11px;font-size:.88rem}
+  .rtable .del{background:none;border:0;cursor:pointer;color:var(--muted);padding:7px;border-radius:8px}
+  .rtable .del:hover{background:#fbeef0;color:#b23a48}
+  .rtable .del svg{width:17px;height:17px}
+
+  .card-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 22px;border-top:1px solid var(--line);background:var(--blue-50);border-radius:0 0 var(--radius) var(--radius);flex-wrap:wrap}
+  .card-foot .meta{font-size:.82rem;color:var(--muted)}
+
+  /* overview stat cards */
+  .ov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:20px}
+  .ov{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-sm)}
+  .ov .ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .ov .ic svg{width:21px;height:21px;color:#fff}
+  .ov.a .ic{background:linear-gradient(135deg,var(--blue-600),var(--blue-700))}
+  .ov.b .ic{background:linear-gradient(135deg,var(--green-600),var(--green-700))}
+  .ov.c .ic{background:linear-gradient(135deg,var(--plum),#8a5cb0)}
+  .ov b{font-family:"Fraunces",serif;font-size:1.05rem;color:var(--blue-900);display:block}
+  .ov span{font-size:.88rem;color:var(--muted)}
+  .ov .quick{margin-top:14px;font-size:.85rem;font-weight:600;color:var(--blue-700);cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+  .ov .quick svg{width:15px;height:15px}
+
+  /* toast */
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--blue-900);color:#fff;
+    padding:13px 20px;border-radius:12px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;font-weight:600;font-size:.92rem;z-index:60;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .toast svg{width:19px;height:19px;color:var(--green-500)}
+
+  @media(max-width:860px){
+    .app.show{grid-template-columns:1fr}
+    .side{display:none}
+    .ov-grid,.row2{grid-template-columns:1fr}
+    .main{padding:22px 18px}
+    .topbar .tb-status{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div class="login" id="loginView">
+  <form class="login-card" id="loginForm">
+    <div class="login-brand">
+      <img src="assets/img/logo.png" alt="Environmental Enterprises USA logo" />
+      <span><b>Environmental Enterprises</b><span>Staff Site Editor</span></span>
+    </div>
+    <h1>Sign in to edit</h1>
+    <p class="sub">Update holiday closures, pickup routes, and site notices — changes publish straight to the live website.</p>
+    <div class="field">
+      <label>Email</label>
+      <input class="input" type="email" value="jdupont@eeusa.com" />
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input class="input" type="password" value="demo1234" />
+    </div>
+    <button class="btn btn-primary" type="submit">Sign In
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg></button>
+    <div class="login-foot">
+      <a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Back to website</a>
+      <a href="#">Forgot password?</a>
+    </div>
+    <p class="demo-note">Demo mockup — any credentials sign you in.</p>
+  </form>
+</div>
+
+<!-- ===== APP ===== -->
+<div class="app" id="appView">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <a class="tb-brand" href="#" onclick="return false">
+      <img src="assets/img/logo.png" alt="EE USA" />
+      <b>EE USA</b>
+    </a>
+    <span class="tb-tag">Site Editor</span>
+    <div class="tb-right">
+      <span class="tb-status"><span class="dot"></span>Published just now</span>
+      <a class="tb-link" href="index.html" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg> View live site</a>
+      <span class="avatar">JD</span>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="side">
+    <div class="sgroup">Editor</div>
+    <div class="nav-item active" data-panel="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg> Overview</div>
+    <div class="nav-item" data-panel="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2Z"/></svg> Notice Board</div>
+    <div class="nav-item" data-panel="routes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Pickup Routes</div>
+    <div class="nav-item" data-panel="hours"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Hours &amp; Contact</div>
+    <div class="side-foot">
+      <div class="logout" id="logoutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg> Log out</div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Overview -->
+    <section class="panel active" data-panel="overview">
+      <div class="page-head">
+        <h1>Welcome back, Jennifer</h1>
+        <p>Here's a snapshot of what's live on eeusa.com right now.</p>
+      </div>
+      <div class="ov-grid">
+        <div class="ov a">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2Z"/></svg></div>
+          <b>1 active alert</b><span>Route delay: Fourchon — weather</span>
+          <div class="quick" data-goto="notice">Edit notice board <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+        <div class="ov b">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <b>4 pickup routes</b><span>11 shore-base stops scheduled</span>
+          <div class="quick" data-goto="routes">Edit routes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+        <div class="ov c">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></div>
+          <b>4 holiday closures</b><span>Next: Independence Day</span>
+          <div class="quick" data-goto="notice">Manage holidays <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Recent activity</h3><div class="ch-sub">Changes you've published to the live site</div></div></div>
+        <div class="card-b" style="padding-top:8px">
+          <div style="display:grid;gap:0">
+            <div style="display:flex;gap:12px;padding:13px 0;border-bottom:1px dashed var(--line)"><span class="avatar" style="width:30px;height:30px;font-size:.72rem">JD</span><div style="font-size:.9rem"><b>Posted weather alert</b> — Fourchon route delay<div style="color:var(--muted);font-size:.82rem">Today, 7:42 AM</div></div></div>
+            <div style="display:flex;gap:12px;padding:13px 0;border-bottom:1px dashed var(--line)"><span class="avatar" style="width:30px;height:30px;font-size:.72rem">JD</span><div style="font-size:.9rem"><b>Updated pickup time</b> — Galliano 1230<div style="color:var(--muted);font-size:.82rem">Jun 28, 4:10 PM</div></div></div>
+            <div style="display:flex;gap:12px;padding:13px 0"><span class="avatar" style="width:30px;height:30px;font-size:.72rem">DD</span><div style="font-size:.9rem"><b>Added holiday closure</b> — Independence Day<div style="color:var(--muted);font-size:.82rem">Jun 20, 9:05 AM</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notice Board -->
+    <section class="panel" data-panel="notice">
+      <div class="page-head">
+        <h1>Notice Board</h1>
+        <p>The schedule, holidays, and alerts shown on the homepage notice board.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg></div><div><h3>Active alert</h3><div class="ch-sub">A banner shown on the site until you turn it off</div></div></div>
+        <div class="card-b">
+          <label class="switch" style="margin-bottom:14px"><input type="checkbox" checked /><span class="track"></span><span class="lab">Alert is live on the site</span></label>
+          <div class="field"><label>Alert message</label><input class="input" type="text" value="Route delay: Fourchon pickup running late due to weather." /></div>
+          <div class="hint">Keep it short — this appears in the Alerts tab of the notice board.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></div><div><h3>Holiday closures</h3><div class="ch-sub">No regular runs on these days</div></div></div>
+        <div class="card-b">
+          <div class="chips" id="holChips">
+            <span class="chip">Mardi Gras <button aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
+            <span class="chip">Good Friday <button aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
+            <span class="chip">Independence Day <button aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
+            <span class="chip">Thanksgiving <button aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
+          </div>
+          <div class="add-row">
+            <input class="input" type="text" id="holInput" placeholder="Add a holiday — e.g. Labor Day" />
+            <button class="btn btn-ghost" type="button" id="holAdd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Schedule note</h3><div class="ch-sub">Shown in the Schedule tab of the notice board</div></div></div>
+        <div class="card-b">
+          <textarea class="input" rows="3">Free pickup and delivery on designated days across our shore-base routes. Samples accepted 24/7 — call 985-960-2313 thirty minutes ahead for after-hours delivery.</textarea>
+        </div>
+        <div class="card-foot">
+          <span class="meta">Last published: Today, 7:42 AM</span>
+          <button class="btn btn-green js-publish" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Publish to live site</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Routes -->
+    <section class="panel" data-panel="routes">
+      <div class="page-head">
+        <h1>Pickup Routes</h1>
+        <p>The shore-base routes and latest pickup times shown on the Sampling Logistics section.</p>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div><h3>Weekly routes</h3><div class="ch-sub">Edit days, stops, and latest pickup times</div></div></div>
+        <div class="card-b">
+          <table class="rtable">
+            <thead><tr><th style="width:34%">Days</th><th>Stops &amp; times</th><th style="width:40px"></th></tr></thead>
+            <tbody id="routeBody">
+              <tr><td><input class="input" value="Wednesday & Friday" /></td><td><input class="input" value="Patterson 0900 · Houma 1100" /></td><td><button class="del" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></td></tr>
+              <tr><td><input class="input" value="Tuesday & Thursday" /></td><td><input class="input" value="Grand Isle 0930 · Fourchon 1100 · Galliano 1230" /></td><td><button class="del" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></td></tr>
+              <tr><td><input class="input" value="Thursday" /></td><td><input class="input" value="Venice 1030 · Boothville 1100" /></td><td><button class="del" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></td></tr>
+              <tr><td><input class="input" value="Wednesday" /></td><td><input class="input" value="Cameron 0900* · ICY 1130 · Mouton Cove 1200 · Abbeville 1230" /></td><td><button class="del" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></td></tr>
+            </tbody>
+          </table>
+          <div class="add-row"><button class="btn btn-ghost" type="button" id="routeAdd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Add route</button></div>
+        </div>
+        <div class="card-foot">
+          <span class="meta">*Cameron subject to availability</span>
+          <button class="btn btn-green js-publish" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Publish to live site</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hours & Contact -->
+    <section class="panel" data-panel="hours">
+      <div class="page-head">
+        <h1>Hours &amp; Contact</h1>
+        <p>Business hours and phone numbers shown across the site.</p>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Details</h3><div class="ch-sub">Update once — reflected everywhere on the site</div></div></div>
+        <div class="card-b">
+          <div class="row2">
+            <div class="field"><label>Business hours</label><input class="input" value="8 AM–5 PM, Monday–Friday" /></div>
+            <div class="field"><label>After-hours delivery line</label><input class="input" value="985-960-2313" /></div>
+            <div class="field"><label>Toll-free</label><input class="input" value="800-966-2788" /></div>
+            <div class="field"><label>Local</label><input class="input" value="985-646-2787" /></div>
+            <div class="field"><label>Fax</label><input class="input" value="985-646-2810" /></div>
+            <div class="field"><label>Address</label><input class="input" value="58485 Pearl Acres Rd., Suite D, Slidell, LA 70461" /></div>
+          </div>
+        </div>
+        <div class="card-foot">
+          <span class="meta">Changes apply to the header, contact section &amp; footer</span>
+          <button class="btn btn-green js-publish" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Publish to live site</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span>Changes published to the live site</span></div>
+
+<script>
+  (function(){
+    var loginView=document.getElementById('loginView');
+    var appView=document.getElementById('appView');
+    var toast=document.getElementById('toast');
+    var toastTimer;
+
+    // Sign in / out
+    document.getElementById('loginForm').addEventListener('submit',function(e){
+      e.preventDefault();
+      loginView.style.display='none';
+      appView.classList.add('show');
+      window.scrollTo(0,0);
+    });
+    document.getElementById('logoutBtn').addEventListener('click',function(){
+      appView.classList.remove('show');
+      loginView.style.display='flex';
+    });
+
+    // Sidebar nav
+    var items=document.querySelectorAll('.nav-item');
+    var panels=document.querySelectorAll('.panel');
+    function go(key){
+      items.forEach(function(i){i.classList.toggle('active',i.getAttribute('data-panel')===key);});
+      panels.forEach(function(p){p.classList.toggle('active',p.getAttribute('data-panel')===key);});
+      document.querySelector('.main').scrollTop=0;
+    }
+    items.forEach(function(i){i.addEventListener('click',function(){go(i.getAttribute('data-panel'));});});
+    document.querySelectorAll('[data-goto]').forEach(function(q){q.addEventListener('click',function(){go(q.getAttribute('data-goto'));});});
+
+    function showToast(msg){
+      if(msg) toast.querySelector('span').textContent=msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer=setTimeout(function(){toast.classList.remove('show');},2600);
+    }
+    document.querySelectorAll('.js-publish').forEach(function(b){b.addEventListener('click',function(){showToast('Changes published to the live site');});});
+
+    // Holiday chips
+    var holChips=document.getElementById('holChips');
+    holChips.addEventListener('click',function(e){
+      var btn=e.target.closest('button');
+      if(btn) btn.closest('.chip').remove();
+    });
+    function addHoliday(){
+      var input=document.getElementById('holInput');
+      var val=input.value.trim();
+      if(!val) return;
+      var chip=document.createElement('span');
+      chip.className='chip';
+      chip.innerHTML=val.replace(/</g,'&lt;')+' <button aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg></button>';
+      holChips.appendChild(chip);
+      input.value='';
+      input.focus();
+    }
+    document.getElementById('holAdd').addEventListener('click',addHoliday);
+    document.getElementById('holInput').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();addHoliday();}});
+
+    // Routes add/remove
+    var routeBody=document.getElementById('routeBody');
+    routeBody.addEventListener('click',function(e){
+      var del=e.target.closest('.del');
+      if(del) del.closest('tr').remove();
+    });
+    document.getElementById('routeAdd').addEventListener('click',function(){
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td><input class="input" placeholder="Day(s)" /></td><td><input class="input" placeholder="Stops & times" /></td><td><button class="del" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></td>';
+      routeBody.appendChild(tr);
+      tr.querySelector('input').focus();
+    });
+  })();
+</script>
+</body>
+</html>
